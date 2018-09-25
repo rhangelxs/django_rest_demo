@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField, IntegerField
+from django.db.models import CharField, IntegerField, DateField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -19,6 +19,8 @@ class User(AbstractUser):
     )
 
     gender = IntegerField(choices=GENDERS, blank=True, null=True)
+
+    birth_date = DateField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})

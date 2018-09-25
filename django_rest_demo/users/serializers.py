@@ -10,9 +10,12 @@ class UsersDetailsSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ('pk', 'username', 'email', 'first_name', 'last_name', 'gender')
+        fields = ('pk', 'username', 'email', 'first_name', 'last_name', 'gender', 'birth_date')
 
         read_only_fields = ('email', )
+
+    birth_date = serializers.DateField(format="%d.%m.%Y", input_formats=['%d.%m.%Y', 'iso-8601'])
+
 
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(
