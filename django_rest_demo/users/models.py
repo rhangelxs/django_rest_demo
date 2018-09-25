@@ -22,5 +22,7 @@ class User(AbstractUser):
 
     birth_date = DateField(blank=True, null=True)
 
+    country = CharField(_("Country name"), blank=True, max_length=255)
+
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
