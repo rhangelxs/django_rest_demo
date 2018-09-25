@@ -253,7 +253,9 @@ REST_FRAMEWORK = {
 
 REST_USE_JWT = True
 
-USER_DETAILS_SERIALIZER = "users.serializers.UsersDetailsSerializer"
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'users.serializers.UsersDetailsSerializer'
+}
 
 # REST_AUTH_REGISTER_SERIALIZERS = "rest_auth.registration.serializers.RegisterSerializer"
 REST_AUTH_REGISTER_SERIALIZERS = {
