@@ -8,6 +8,8 @@ from django.views import defaults as default_views
 from rest_auth.views import LoginView as RestAuthLoginView
 from rest_auth.registration.views import RegisterView as RestAuthRegisterView
 
+from django_rest_demo.users.views_rest import UserList
+
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
@@ -36,9 +38,15 @@ urlpatterns += [
 
     path('api/register/', RestAuthRegisterView.as_view(), name="register"),
     path('api/sign_in/', RestAuthLoginView.as_view(), name="login"),
+    # path('api/users/', UserList.as_view(), name="login"),
 ]
 
+from rest_framework.routers import DefaultRouter
 
+router = DefaultRouter()
+router.register('api/users', UserList, base_name='users')
+
+urlpatterns += router.urls
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
