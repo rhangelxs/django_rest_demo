@@ -2,7 +2,7 @@ from rest_framework import generics, viewsets, permissions, mixins
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 
-from .serializers import LocationsDetailsSerializer, LocationVisitSerializer
+from .serializers import LocationsDetailsSerializer, LocationVisitSerializer, LocationRatioSerializer
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -32,3 +32,9 @@ class LocationVisit(generics.CreateAPIView):
         queryset = Visit.objects.filter(location_id=self.kwargs["pk"])
         return queryset
     serializer_class = LocationVisitSerializer
+
+class LocationRatio(generics.RetrieveAPIView):
+    def get_queryset(self):
+        queryset = Location.objects.filter(pk=self.kwargs["pk"])
+        return queryset
+    serializer_class = LocationRatioSerializer
