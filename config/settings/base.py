@@ -261,3 +261,7 @@ REST_AUTH_SERIALIZERS = {
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'users.serializers.RegisterSerializer'
 }
+
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': "Bearer"
+}
