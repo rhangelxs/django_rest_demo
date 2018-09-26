@@ -74,6 +74,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'django_rest_demo.users.apps.UsersAppConfig',
     # Your stuff: custom apps go here
+    'django_rest_demo.checkin.apps.CheckinAppConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

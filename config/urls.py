@@ -8,25 +8,26 @@ from django.views import defaults as default_views
 from rest_auth.views import LoginView as RestAuthLoginView
 from rest_auth.registration.views import RegisterView as RestAuthRegisterView
 
+from django_rest_demo.checkin.views import LocationList, LocationVisit
 from django_rest_demo.users.views_rest import UserList
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/",
-        TemplateView.as_view(template_name="pages/about.html"),
-        name="about",
-    ),
-    # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
-    # User management
-    path(
-        "users/",
-        include("django_rest_demo.users.urls", namespace="users"),
-    ),
-    path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
-] + static(
+                  path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+                  path(
+                      "about/",
+                      TemplateView.as_view(template_name="pages/about.html"),
+                      name="about",
+                  ),
+                  # Django Admin, use {% url 'admin:index' %}
+                  path(settings.ADMIN_URL, admin.site.urls),
+                  # User management
+                  path(
+                      "users/",
+                      include("django_rest_demo.users.urls", namespace="users"),
+                  ),
+                  path("accounts/", include("allauth.urls")),
+                  # Your stuff: custom urls includes go here
+              ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
 
@@ -45,6 +46,13 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('api/users', UserList, base_name='users')
+
+router.register('api/locations', LocationList, base_name='users')
+
+
+urlpatterns += [
+    path('api/locations/<int:pk>/visit/', LocationVisit.as_view(), name="location_visit"),
+]
 
 urlpatterns += router.urls
 
