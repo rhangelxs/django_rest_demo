@@ -8,7 +8,7 @@ from django.views import defaults as default_views
 from rest_auth.views import LoginView as RestAuthLoginView
 from rest_auth.registration.views import RegisterView as RestAuthRegisterView
 
-from django_rest_demo.checkin.views import LocationList, LocationVisit, LocationRatio
+from django_rest_demo.checkin.views import LocationList, LocationVisit, LocationRatio, UserRatio
 from django_rest_demo.users.views_rest import UserList
 
 urlpatterns = [
@@ -53,6 +53,7 @@ router.register('api/locations', LocationList, base_name='users')
 urlpatterns += [
     path('api/locations/<int:pk>/visit/', LocationVisit.as_view(), name="location_visit"),
     path('api/locations/<int:pk>/ratio/', LocationRatio.as_view(), name="location_ratio"),
+    path('api/users/<int:pk>/ratio/', UserRatio.as_view(), name="user_ratio"),
 
 ]
 

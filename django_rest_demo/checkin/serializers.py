@@ -16,8 +16,8 @@ class LocationsDetailsSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Location
-        #fields = ('pk', 'username', 'email', 'first_name', 'last_name', 'gender', 'birth_date', 'country')
-        exclude = ()
+        fields = '__all__'
+        #exclude = ()
         # read_only_fields = ('pk', )
 
     # birth_date = serializers.DateField(format="%d.%m.%Y", input_formats=['%d.%m.%Y', 'iso-8601'])
@@ -31,10 +31,10 @@ class LocationVisitSerializer(serializers.ModelSerializer):
 class LocationRatioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ("visits", "count", "avg")
+        fields = ("visitors", "count", "avg")
         # read_only_fields = ('date',)
 
-    visits = serializers.SerializerMethodField()
+    visitors = serializers.SerializerMethodField()
     count = serializers.SerializerMethodField()
     avg = serializers.SerializerMethodField()
 
@@ -44,5 +44,25 @@ class LocationRatioSerializer(serializers.ModelSerializer):
     def get_count(self, obj):
         return obj.visit_set.count()
 
-    def get_visits(self, obj):
-        return LocationVisitSerializer(obj.visit_set.all().order_by('id'), many=True, read_only=True).data
+    def get_visitors(self, obj):
+        return UsersDetailsSerializer(User.objects.filter(visit__location_id=obj).distinct(), many=True, read_only=True).data
+
+class UserRatioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("locations", "count", "avg")
+        # read_only_fields = ('date',)
+
+    locations = serializers.SerializerMethodField()
+    count = serializers.SerializerMethodField()
+    avg = serializers.SerializerMethodField()
+
+    def get_avg(self, obj):
+        return obj.visit_set.aggregate(Avg('ratio')).get("ratio__avg")
+
+    def get_count(self, obj):
+        return obj.visit_set.count()
+
+    def get_locations(self, obj):
+        # return LocationsDetailsSerializer(obj.visit_set.all().values("location_id").distinct(), many=True, read_only=True).data
+        return LocationsDetailsSerializer(Location.objects.filter(visit__user_id=obj).distinct(), many=True, read_only=True).data
