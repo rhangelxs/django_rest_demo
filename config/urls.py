@@ -1,9 +1,12 @@
 from django.conf import settings
-from django.urls import include, path
+from django.urls import include, path, reverse, resolve
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+
+from rest_auth.views import LoginView as RestAuthLoginView
+from rest_auth.registration.views import RegisterView as RestAuthRegisterView
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -28,8 +31,11 @@ urlpatterns = [
 # DRF login pages
 urlpatterns += [
     path("api/", include('rest_framework.urls', namespace="rest_framework")),
-    path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls'))
+    path('api/rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+
+    path('api/register/', RestAuthRegisterView.as_view(), name="register"),
+    path('api/sign_in/', RestAuthLoginView.as_view(), name="login"),
 ]
 
 
