@@ -28,22 +28,8 @@ class RegisterSerializer(serializers.Serializer):
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
 
-    gender = serializers.CharField(write_only=True)
-
-    # def validate_username(self, username):
-    #     username = get_adapter().clean_username(username)
-    #     return username
-    #
-    # def validate_email(self, email):
-    #     email = get_adapter().clean_email(email)
-    #     if allauth_settings.UNIQUE_EMAIL:
-    #         if email and email_address_exists(email):
-    #             raise serializers.ValidationError(
-    #                 _("A user is already registered with this e-mail address."))
-    #     return email
-    #
-    # def validate_password1(self, password):
-    #     return get_adapter().clean_password(password)
+    # We can add custom field, but better ro split it to other url
+    # gender = serializers.CharField(write_only=True)
 
     def validate(self, data):
         if data['password1'] != data['password2']:
