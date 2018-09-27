@@ -69,7 +69,8 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',
     'rest_framework',
 
-    'rest_auth'
+    'rest_auth',
+    'rest_framework_swagger'
 ]
 LOCAL_APPS = [
     'django_rest_demo.users.apps.UsersAppConfig',

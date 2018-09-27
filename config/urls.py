@@ -11,7 +11,15 @@ from rest_auth.registration.views import RegisterView as RestAuthRegisterView
 from django_rest_demo.checkin.views import LocationList, LocationVisit, LocationRatio, UserRatio
 from django_rest_demo.users.views_rest import UserList
 
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='REST API')
+
 urlpatterns = [
+    path('', schema_view)
+]
+
+urlpatterns += [
                   path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
                   path(
                       "about/",
