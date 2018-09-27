@@ -41,8 +41,8 @@ urlpatterns += [
 
 # DRF login pages
 urlpatterns += [
-    path("api/", include('rest_framework.urls', namespace="rest_framework")),
-    path('api/rest-auth/', include('rest_auth.urls')),
+    # path("api/", include('rest_framework.urls', namespace="rest_framework")),
+    path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
 
     path('api/register/', RestAuthRegisterView.as_view(), name="rest_register"),
