@@ -14,6 +14,7 @@ class Location(models.Model):
     def get_absolute_url(self):
         return reverse("locations:detail", kwargs={"id": self.pk})
 
+
 class Visit(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE)

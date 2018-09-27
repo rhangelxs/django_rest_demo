@@ -1,17 +1,16 @@
 from django.conf import settings
-from django.urls import include, path, reverse, resolve
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.urls import include, path
 from django.views import defaults as default_views
-
-from rest_auth.views import LoginView as RestAuthLoginView
+from django.views.generic import TemplateView
 from rest_auth.registration.views import RegisterView as RestAuthRegisterView
+from rest_auth.views import LoginView as RestAuthLoginView
+from rest_framework_swagger.views import get_swagger_view
+from rest_framework.routers import DefaultRouter
 
 from django_rest_demo.checkin.views import LocationList, LocationVisit, LocationRatio, UserRatio, VisitList
 from django_rest_demo.users.views_rest import UserList
-
-from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_swagger_view(title='REST API')
 
@@ -49,8 +48,6 @@ urlpatterns += [
     path('api/sign_in/', RestAuthLoginView.as_view(), name="rest_login"),
     # path('api/users/', UserList.as_view(), name="login"),
 ]
-
-from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('api/users', UserList, base_name='users')
