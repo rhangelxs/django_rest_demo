@@ -255,12 +255,12 @@ REST_FRAMEWORK = {
 REST_USE_JWT = True
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'users.serializers.UsersDetailsSerializer'
+    'USER_DETAILS_SERIALIZER': 'django_rest_demo.users.serializers.UsersDetailsSerializer'
 }
 
 # REST_AUTH_REGISTER_SERIALIZERS = "rest_auth.registration.serializers.RegisterSerializer"
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'users.serializers.RegisterSerializer'
+    'REGISTER_SERIALIZER': 'django_rest_demo.users.serializers.RegisterSerializer'
 }
 
 JWT_AUTH = {
