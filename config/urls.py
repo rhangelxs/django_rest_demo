@@ -45,8 +45,8 @@ urlpatterns += [
     path('api/rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
 
-    path('api/register/', RestAuthRegisterView.as_view(), name="register"),
-    path('api/sign_in/', RestAuthLoginView.as_view(), name="login"),
+    path('api/register/', RestAuthRegisterView.as_view(), name="rest_register"),
+    path('api/sign_in/', RestAuthLoginView.as_view(), name="rest_login"),
     # path('api/users/', UserList.as_view(), name="login"),
 ]
 
