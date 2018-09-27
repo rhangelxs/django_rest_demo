@@ -8,7 +8,7 @@ from django.views import defaults as default_views
 from rest_auth.views import LoginView as RestAuthLoginView
 from rest_auth.registration.views import RegisterView as RestAuthRegisterView
 
-from django_rest_demo.checkin.views import LocationList, LocationVisit, LocationRatio, UserRatio
+from django_rest_demo.checkin.views import LocationList, LocationVisit, LocationRatio, UserRatio, VisitList
 from django_rest_demo.users.views_rest import UserList
 
 from rest_framework_swagger.views import get_swagger_view
@@ -55,7 +55,8 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register('api/users', UserList, base_name='users')
 
-router.register('api/locations', LocationList, base_name='users')
+router.register('api/locations', LocationList, base_name='locations')
+router.register('api/visits', VisitList, base_name='visits')
 
 
 urlpatterns += [

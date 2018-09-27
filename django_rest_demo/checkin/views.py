@@ -45,3 +45,13 @@ class UserRatio(generics.RetrieveAPIView):
         queryset = User.objects.filter(pk=self.kwargs["pk"])
         return queryset
     serializer_class = UserRatioSerializer
+
+class VisitList(mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet):
+    queryset = Visit.objects.all()
+    serializer_class = LocationVisitSerializer
+    permission_classes = [VisitorIsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
